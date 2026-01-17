@@ -9,10 +9,8 @@
 #include "elf.h"
 #include "x86.h"
 #include "memlayout.h"
-
 #define SECTSIZE  512
 // 磁盘扇区大小固定为512字节
-
 // 函数声明：从磁盘读取指定扇区到内存指定地址
 void readseg(uchar*, uint, uint);
 // bootmain是xv6启动流程中第一个执行的C语言函数
@@ -30,7 +28,6 @@ bootmain(void)
   //    磁盘扇区0是bootasm.S引导扇区，内核从扇区1开始存储
   // Read 1st page off disk
   readseg((uchar*)elf, 4096, 0);
-
   // Is this an ELF executable?
   if(elf->magic != ELF_MAGIC)
     return;  // let bootasm.S handle error
@@ -46,7 +43,6 @@ bootmain(void)
     if(ph->memsz > ph->filesz)
       stosb(pa + ph->filesz, 0, ph->memsz - ph->filesz);
   }
-
   // Call the entry point from the ELF header.
   // Does not return!
   entry = (void(*)(void))(elf->entry);
