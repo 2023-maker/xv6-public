@@ -17,7 +17,9 @@
 # 	multiboot ${kernel} ${kernel}
 # 	boot
 # }
-
+# entry.S -- 内核的入口程序，bootmain加载内核后跳转至此
+# 核心功能：初始化内核栈、开启分页、清零BSS段、调用内核main函数
+# 运行环境：32位保护模式，关闭中断，页表未开启，物理地址直接访问
 #include "asm.h"
 #include "memlayout.h"
 #include "mmu.h"
